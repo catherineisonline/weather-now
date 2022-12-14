@@ -7,7 +7,7 @@ import { ThemeProvider } from "styled-components";
 import { clouds, rain, clear } from "./core-ui/Themes.styled";
 
 
-const APIkey = "f2b7ec03f3daeb5cfeb9300a408b2cb8";
+
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
   const [targetLocation, setTargetLocation] = useState({});
@@ -21,7 +21,7 @@ function App() {
 
   const setWeather = theme === "rain" ? rain : theme === "clouds" ? clouds : clear;
   useEffect(() => {
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${APIkey}`)
+    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
         setLat(data[0].lat); setLon(data[0].lon); setSearchDone(true); setTodayWeather(prev => { return { ...prev, name: data[0].name } })
@@ -31,7 +31,7 @@ function App() {
 
   useEffect(() => {
     if (searchDone) {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&appid=${APIkey}&units=metric&`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
         .then(response => response.json())
         .then(data => {
           setTargetLocation(data);
