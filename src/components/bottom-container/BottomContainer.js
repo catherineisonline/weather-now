@@ -15,14 +15,6 @@ const BottomContainer = ({ todayWeather }) => {
                 <h2>Wind</h2>
                 <p>{todayWeather.wind} km/h</p>
             </section>
-            <section>
-                <h2>Highest</h2>
-                <p>{todayWeather.highest}&#8451;</p>
-            </section>
-            <section>
-                <h2>Lowest</h2>
-                <p>{todayWeather.lowest}&#8451;</p>
-            </section>
         </FooterBlock>
     )
 }

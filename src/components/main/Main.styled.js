@@ -28,6 +28,7 @@ justify-content: space-between;
 font-family: "Ubuntu", sans-serif;
 height: 100%;
 background-image: ${({ theme }) => theme.colors.background};
+color: ${({ theme }) => theme.colors.color};
     background-size:cover;
      -webkit-background-size: cover;
     background-repeat: no-repeat;

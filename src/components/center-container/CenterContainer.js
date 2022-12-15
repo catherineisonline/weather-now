@@ -1,4 +1,4 @@
-import CenterContainerBlock from "./CenterContainer.styled"
+import { CenterContainerBlock, HighLow, WeatherDesc } from "./CenterContainer.styled"
 import Temperature from "./Temperature.styled";
 
 const CenterContainer = ({ todayWeather }) => {
@@ -6,13 +6,13 @@ const CenterContainer = ({ todayWeather }) => {
         <CenterContainerBlock>
             <section>
                 <h1>{todayWeather.name}</h1>
-                <Temperature>{todayWeather.temp}&#8451;</Temperature>
-                {/* <img src={`http://openweathermap.org/img/wn/${todayWeather.icon}@2x.png`} alt="" /> */}
-                <p>{todayWeather.weather}</p>
+                <Temperature>{todayWeather.temp}&deg;</Temperature>
+                <WeatherDesc>{todayWeather.weatherDesc}</WeatherDesc>
             </section>
-            <section>
-
-            </section>
+            <HighLow>
+                <p>H: {todayWeather.highest}&deg;</p>
+                <p>L: {todayWeather.lowest}&deg;</p>
+            </HighLow>
         </CenterContainerBlock>
     )
 }

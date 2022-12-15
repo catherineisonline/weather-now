@@ -8,7 +8,7 @@ import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist,
 
 
 function App() {
-  const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
+  const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
   const [targetLocation, setTargetLocation] = useState({});
   const [searchedLocation, setSearchedLocation] = useState("Buenos Aires");
   const [lang, setLang] = useState("en");
@@ -21,6 +21,7 @@ function App() {
   const [formError, setFormError] = useState({});
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
     setFormError(validateForm(formValue));
     setSubmit(true);
@@ -58,9 +59,10 @@ function App() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
+          console.log(data.weather[0])
           setTargetLocation(data);
-          setTodayWeather({ ...todayWeather, temp: Math.ceil(data.main.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+
+          setTodayWeather({ ...todayWeather, temp: Math.ceil(data.main.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
         }).catch((err) => {
           console.log(err.message);
         });
@@ -101,6 +103,7 @@ function App() {
       }
       //, Dust, Sand, Ash, Squall, Tornado
     }
+
     toggleTheme();
     return () => setSearchDone(false);
 
