@@ -1,6 +1,7 @@
 
 # Available dependencies
 - [Open Weather](https://openweathermap.org/)
+- [Illustrations Author](https://www.freepik.com/author/starline)
 
 
 

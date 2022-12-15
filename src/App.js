@@ -1,30 +1,54 @@
 
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import WeatherContainer from "./components/weather/WeatherContainer";
+import Main from "./components/main/Main";
 import { useEffect, useState } from "react";
 import GlobalStyles from "./core-ui/Globals";
 import { ThemeProvider } from "styled-components";
-import { clouds, rain, clear } from "./core-ui/Themes.styled";
-
+import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist, smoke, fog, haze } from "./core-ui/Themes.styled";
 
 
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
   const [targetLocation, setTargetLocation] = useState({});
-  const [searchedLocation, setSearchedLocation] = useState("Jakarta");
+  const [searchedLocation, setSearchedLocation] = useState("Buenos Aires");
   const [lang, setLang] = useState("en");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [searchDone, setSearchDone] = useState(false);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('clear');
+  const [formValue, setFormValue] = useState({ searchedLocation: "" });
+  const [submit, setSubmit] = useState(false);
+  const [formError, setFormError] = useState({});
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormError(validateForm(formValue));
+    setSubmit(true);
+    setSearchedLocation(formValue.searchedLocation);
+    setFormValue({ searchedLocation: "" });
+  }
+  const handleValidation = async (e) => {
+    const { name, value } = e.target;
+    setFormValue({ ...formValue, [name]: value });
+  }
+  const validateForm = (value) => {
+    let errors = {};
+    if (!value.searchedLocation) {
+      errors.searchedLocation = "Please enter your full name"
+    }
+    return errors;
+  }
+
+  const setWeather = theme === "rain" ? rain : theme === "clouds" ? clouds : theme === "clear" ? clear : theme === "thunderstorm" ? thunderstorm : theme === "snow" ? snow : theme === "drizzle" ? drizzle : theme === "mist" ? mist : theme === "smoke" ? smoke : theme === "haze" ? haze : theme === "fog" ? fog : defaultWeather;
 
 
-  const setWeather = theme === "rain" ? rain : theme === "clouds" ? clouds : clear;
   useEffect(() => {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
         setLat(data[0].lat); setLon(data[0].lon); setSearchDone(true); setTodayWeather(prev => { return { ...prev, name: data[0].name } })
+      }).catch((err) => {
+        console.log(err.message);
       });
 
   }, [searchedLocation]);
@@ -34,56 +58,62 @@ function App() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
         .then(response => response.json())
         .then(data => {
+          console.log(data)
           setTargetLocation(data);
-          console.log(data);
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data.main.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+        }).catch((err) => {
+          console.log(err.message);
         });
     }
     const toggleTheme = () => {
+      if (todayWeather.weather === '') {
+        setTheme('default');
+      }
+      if (todayWeather.weather === 'clouds') {
+        setTheme('clouds');
+      }
       if (todayWeather.weather === 'rain') {
         setTheme('rain');
       }
-      else if (todayWeather.weather === 'clear') {
+      if (todayWeather.weather === 'clear') {
         setTheme('clear');
       }
-      else if (todayWeather.weather === 'thunderstorm') {
+      if (todayWeather.weather === 'thunderstorm') {
         setTheme('thunderstorm');
       }
-      else if (todayWeather.weather === 'snow') {
+      if (todayWeather.weather === 'snow') {
         setTheme('snow');
       }
-      else if (todayWeather.weather === 'drizzle') {
+      if (todayWeather.weather === 'drizzle') {
         setTheme('drizzle');
       }
       else if (todayWeather.weather === 'mist') {
         setTheme('mist');
       }
-      else if (todayWeather.weather === 'smoke') {
+      if (todayWeather.weather === 'smoke') {
         setTheme('smoke');
       }
-      else if (todayWeather.weather === 'fog') {
+      if (todayWeather.weather === 'fog') {
         setTheme('fog');
       }
-      else if (todayWeather.weather === 'haze') {
+      if (todayWeather.weather === 'haze') {
         setTheme('haze');
-      }
-      else if (todayWeather.weather === 'clouds') {
-        setTheme('clouds');
       }
       //, Dust, Sand, Ash, Squall, Tornado
     }
     toggleTheme();
     return () => setSearchDone(false);
 
-  }, [searchDone, lat, lon, lang, todayWeather]);
+  }, [searchDone, lat, lon, lang, todayWeather, searchedLocation]);
 
   return (
     <ThemeProvider theme={setWeather}>
       <BrowserRouter>
         <GlobalStyles />
         <Routes>
-          <Route path="/" element={<WeatherContainer todayWeather={todayWeather} />} />
+          <Route path="/" element={<Main formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
         </Routes>
+
       </BrowserRouter>
     </ThemeProvider>
   );

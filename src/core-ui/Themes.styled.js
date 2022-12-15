@@ -1,3 +1,4 @@
+import defaultWeatherImage from "../assets/images/weather/defaultWeather.jpg";
 import cloudsImage from "../assets/images/weather/clouds.jpg";
 import rainImage from "../assets/images/weather/rain.jpg";
 import clearImage from "../assets/images/weather/clear.jpg"
@@ -7,8 +8,15 @@ import snowImage from "../assets/images/weather/snow.jpg"
 import mistImage from "../assets/images/weather/mist.jpg"
 import smokeImage from "../assets/images/weather/smoke.jpg"
 import fogImage from "../assets/images/weather/fog.jpg"
-import hazeImage from "../assets/images/weather/haze.jpg"
+import hazeImage from "../assets/images/weather/haze.jpg";
 
+export const defaultWeather = {
+    name: "defaultWeather",
+    colors: {
+        background: `url(${defaultWeatherImage})`,
+        color: "white",
+    }
+}
 
 export const clouds = {
     name: "clouds",
