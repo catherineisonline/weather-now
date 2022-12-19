@@ -11,5 +11,9 @@ margin: 0 auto;
 align-items: center;
 justify-content: center;
 text-align: center;
+@media (max-width: 470px) {
+    flex-direction: column;
+    padding-top: 10rem;
+  }
 `;
 export default FooterBlock;

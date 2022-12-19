@@ -9,7 +9,8 @@ align-items: center;
 margin: 0 auto;
 padding: 2rem;
 max-width: 600px;
-width: 600px;
+min-width: 400px;
+width: 100%;
 font-size: 2.5rem;
 `;
 
