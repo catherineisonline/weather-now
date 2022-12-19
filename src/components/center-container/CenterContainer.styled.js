@@ -23,5 +23,9 @@ font-size: 1.4rem;
 
 const WeatherDesc = styled.p`
 font-size: 1.4rem;
-`
-export { CenterContainerBlock, HighLow, WeatherDesc };
+`;
+
+const Temperature = styled.p`
+font-size: 3.5rem;
+`;
+export { CenterContainerBlock, HighLow, WeatherDesc, Temperature };

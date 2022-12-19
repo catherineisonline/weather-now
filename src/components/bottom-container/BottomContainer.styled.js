@@ -16,4 +16,20 @@ text-align: center;
     padding-top: 10rem;
   }
 `;
-export default FooterBlock;
+
+const DataSection = styled.section`
+display: flex;
+flex-direction: column;
+align-items: center;
+`;
+
+const Image = styled.img`
+width: 4rem;
+height: 4rem;
+background-color:${({ theme }) => theme.colors.iconBg};
+backdrop-filter: blur(5px);
+border-radius: 50%;
+padding: 1rem;
+opacity: 0.6;
+`;
+export { FooterBlock, DataSection, Image };

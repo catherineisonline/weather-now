@@ -1,5 +1,5 @@
-import { CenterContainerBlock, HighLow, WeatherDesc } from "./CenterContainer.styled"
-import Temperature from "./Temperature.styled";
+import { CenterContainerBlock, HighLow, WeatherDesc, Temperature } from "./CenterContainer.styled";
+
 
 const CenterContainer = ({ todayWeather }) => {
     return (

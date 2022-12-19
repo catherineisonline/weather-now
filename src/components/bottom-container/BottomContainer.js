@@ -1,20 +1,26 @@
-import FooterBlock from "./BottomContainer.styled";
+import { FooterBlock, DataSection, Image } from "./BottomContainer.styled";
+import FeelsLike from "../../assets/images/footer/feels.png";
+import Wind from "../../assets/images/footer/wind.png";
+import Humidity from "../../assets/images/footer/humidity.png";
 
 const BottomContainer = ({ todayWeather }) => {
     return (
         <FooterBlock>
-            <section>
+            <DataSection>
+                <Image src={FeelsLike} alt="" aria-hidden="true" />
                 <h2>Feels like</h2>
                 <p>{todayWeather.feelsLike}&#8451;</p>
-            </section>
-            <section>
+            </DataSection>
+            <DataSection>
+                <Image src={Humidity} alt="" aria-hidden="true" />
                 <h2>Humidity</h2>
                 <p>{todayWeather.humidity}%</p>
-            </section>
-            <section>
+            </DataSection>
+            <DataSection>
+                <Image src={Wind} alt="" aria-hidden="true" />
                 <h2>Wind</h2>
                 <p>{todayWeather.wind} km/h</p>
-            </section>
+            </DataSection>
         </FooterBlock>
     )
 }
