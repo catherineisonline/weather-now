@@ -1,9 +1,21 @@
 import { CenterContainerBlock, HighLow, WeatherDesc, Temperature } from "./CenterContainer.styled";
+import ClipLoader from "react-spinners/ClipLoader";
+import React from "react";
 
 
-const CenterContainer = ({ todayWeather }) => {
+const CenterContainer = ({ todayWeather, loading }) => {
     return (
-        <CenterContainerBlock>
+        <React.Fragment>
+        {loading ?
+        <ClipLoader
+        className="loader"
+            color="black"
+            loading={loading}
+            size={190}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          /> :
+          <CenterContainerBlock>
             <section>
                 <h1>{todayWeather.name}</h1>
                 <Temperature>{todayWeather.temp}&deg;</Temperature>
@@ -13,7 +25,8 @@ const CenterContainer = ({ todayWeather }) => {
                 <p>H: {todayWeather.highest}&deg;</p>
                 <p>L: {todayWeather.lowest}&deg;</p>
             </HighLow>
-        </CenterContainerBlock>
+        </CenterContainerBlock>}
+      </React.Fragment>
     )
 }
 

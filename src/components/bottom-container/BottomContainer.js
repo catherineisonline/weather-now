@@ -2,10 +2,13 @@ import { FooterBlock, DataSection, Image } from "./BottomContainer.styled";
 import FeelsLike from "../../assets/images/footer/feels.png";
 import Wind from "../../assets/images/footer/wind.png";
 import Humidity from "../../assets/images/footer/humidity.png";
+import React from "react";
 
-const BottomContainer = ({ todayWeather }) => {
+const BottomContainer = ({ todayWeather, loading }) => {
     return (
-        <FooterBlock>
+        <React.Fragment>
+            {loading ?    <FooterBlock>{null}</FooterBlock> : 
+                <FooterBlock>
             <DataSection>
                 <Image src={FeelsLike} alt="" aria-hidden="true" />
                 <h2>Feels like</h2>
@@ -22,6 +25,8 @@ const BottomContainer = ({ todayWeather }) => {
                 <p>{todayWeather.wind} km/h</p>
             </DataSection>
         </FooterBlock>
+    }
+    </React.Fragment>
     )
 }
 

@@ -9,22 +9,23 @@ import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist,
 
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
-  const [targetLocation, setTargetLocation] = useState({});
+  // const [targetLocation, setTargetLocation] = useState({});
   const [searchedLocation, setSearchedLocation] = useState("Buenos Aires");
-  const [lang, setLang] = useState("en");
+  // const [lang, setLang] = useState("en");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [searchDone, setSearchDone] = useState(false);
   const [theme, setTheme] = useState('clear');
   const [formValue, setFormValue] = useState({ searchedLocation: "" });
-  const [submit, setSubmit] = useState(false);
+  // const [submit, setSubmit] = useState(false);
   const [formError, setFormError] = useState({});
+  const [loading, setLoading] = useState("");
 
   const handleSubmit = (e) => {
 
     e.preventDefault();
     setFormError(validateForm(formValue));
-    setSubmit(true);
+    // setSubmit(true);
     setSearchedLocation(formValue.searchedLocation);
     setFormValue({ searchedLocation: "" });
   }
@@ -35,7 +36,7 @@ function App() {
   const validateForm = (value) => {
     let errors = {};
     if (!value.searchedLocation) {
-      errors.searchedLocation = "Please enter your full name"
+      errors.searchedLocation = "Please enter a country name"
     }
     return errors;
   }
@@ -44,6 +45,7 @@ function App() {
 
 
   useEffect(() => {
+    setLoading(true);
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
@@ -56,13 +58,13 @@ function App() {
 
   useEffect(() => {
     if (searchDone) {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&lang=${lang}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
         .then(response => response.json())
         .then(data => {
-          console.log(data.weather[0])
-          setTargetLocation(data);
+          // setTargetLocation(data);
 
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data.main.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+          setLoading(false);
         }).catch((err) => {
           console.log(err.message);
         });
@@ -107,16 +109,15 @@ function App() {
     toggleTheme();
     return () => setSearchDone(false);
 
-  }, [searchDone, lat, lon, lang, todayWeather, searchedLocation]);
+  }, [searchDone, lat, lon, todayWeather, searchedLocation]);
 
   return (
     <ThemeProvider theme={setWeather}>
       <BrowserRouter>
         <GlobalStyles />
         <Routes>
-          <Route path="/" element={<Main formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
+          <Route path="/" element={<Main loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
         </Routes>
-
       </BrowserRouter>
     </ThemeProvider>
   );
