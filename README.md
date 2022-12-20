@@ -1,6 +1,8 @@
-![Project preview]()
+![Project preview](https://github.com/catherineisonline/weather-now/blob/main/src/assets/images/project-preview.png?raw=true)
 
-# Weather Now ☀️
+# Weather Now 
+
+Weather Now is a simple project made with Weather API which shows you the current weather of your target location
 
 
 # Available dependencies
