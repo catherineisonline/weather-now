@@ -49,7 +49,8 @@ function App() {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
-        setLat(data[0].lat); setLon(data[0].lon); setSearchDone(true); setTodayWeather(prev => { return { ...prev, name: data[0].name } })
+        console.log(data)
+        setLat(data[0].lat); setLon(data[0].lon); setSearchDone(true); setTodayWeather(prev => { return { ...prev, name: data[0].local_names.en } })
       }).catch((err) => {
         console.log(err.message);
       });
