@@ -49,10 +49,13 @@ function App() {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
-        console.log(data)
-        setLat(data[0].lat); setLon(data[0].lon); setSearchDone(true); setTodayWeather(prev => { return { ...prev, name: data[0].local_names.en } })
+        setLat(data[0]?.lat);
+        setLon(data[0]?.lon);
+        setSearchDone(true);
+        setTodayWeather(prev => { return { ...prev, name: data[0]?.local_names?.en } })
       }).catch((err) => {
         console.log(err.message);
+        setSearchDone(false);
       });
 
   }, [searchedLocation]);
@@ -64,10 +67,12 @@ function App() {
         .then(data => {
           // setTargetLocation(data);
 
-          setTodayWeather({ ...todayWeather, temp: Math.ceil(data.main.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+          setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
           setLoading(false);
         }).catch((err) => {
-          console.log(err.message);
+          setSearchDone(false);
+          setLoading(false);
+          console.log(err.message, "errrr");
         });
     }
     const toggleTheme = () => {

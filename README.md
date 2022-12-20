@@ -1,3 +1,7 @@
+![Project preview]()
+
+# Weather Now ☀️
+
 
 # Available dependencies
 - [Open Weather](https://openweathermap.org/)
