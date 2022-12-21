@@ -1,9 +1,9 @@
 import { CenterContainerBlock, HighLow, WeatherDesc, Temperature } from "./CenterContainer.styled";
 import ClipLoader from "react-spinners/ClipLoader";
 import React from "react";
+import NotFound from "../../assets/images/not-found.png";
 
-
-const CenterContainer = ({ todayWeather, loading }) => {
+const CenterContainer = ({ todayWeather, loading, noData }) => {
     return (
         <React.Fragment>
         {loading ?
@@ -14,10 +14,10 @@ const CenterContainer = ({ todayWeather, loading }) => {
             size={190}
             aria-label="Loading Spinner"
             data-testid="loader"
-          /> :
+          /> : noData ?           <CenterContainerBlock><img src={NotFound} alt="" aria-hidden="true"/> <p>No such country found! Please try again </p></CenterContainerBlock> :
           <CenterContainerBlock>
             <section>
-                <h1>{todayWeather.name}</h1>
+                <h1>{todayWeather.name}, {todayWeather.country}</h1>
                 <Temperature>{todayWeather.temp}&deg;</Temperature>
                 <WeatherDesc>{todayWeather.weatherDesc}</WeatherDesc>
             </section>

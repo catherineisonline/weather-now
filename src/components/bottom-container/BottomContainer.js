@@ -4,10 +4,10 @@ import Wind from "../../assets/images/footer/wind.png";
 import Humidity from "../../assets/images/footer/humidity.png";
 import React from "react";
 
-const BottomContainer = ({ todayWeather, loading }) => {
+const BottomContainer = ({ todayWeather, loading, noData }) => {
     return (
         <React.Fragment>
-            {loading ?    <FooterBlock>{null}</FooterBlock> : 
+            {loading || noData ? <FooterBlock>{null}</FooterBlock> : 
                 <FooterBlock>
             <DataSection>
                 <Image src={FeelsLike} alt="" aria-hidden="true" />

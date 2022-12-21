@@ -8,7 +8,7 @@ import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist,
 
 
 function App() {
-  const [todayWeather, setTodayWeather] = useState({ name: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
+  const [todayWeather, setTodayWeather] = useState({ name: "", country: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
   // const [targetLocation, setTargetLocation] = useState({});
   const [searchedLocation, setSearchedLocation] = useState("Buenos Aires");
   // const [lang, setLang] = useState("en");
@@ -19,6 +19,7 @@ function App() {
   const [formValue, setFormValue] = useState({ searchedLocation: "" });
   // const [submit, setSubmit] = useState(false);
   const [formError, setFormError] = useState({});
+  const [noData, setNoData] = useState(false);
   const [loading, setLoading] = useState("");
 
   const handleSubmit = (e) => {
@@ -38,6 +39,8 @@ function App() {
     if (!value.searchedLocation) {
       errors.searchedLocation = "Please enter a country name"
     }
+    
+    
     return errors;
   }
 
@@ -46,32 +49,35 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    setNoData(false);
+    console.log(searchedLocation);
+    
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
       .then(data => {
         setLat(data[0]?.lat);
         setLon(data[0]?.lon);
         setSearchDone(true);
-        setTodayWeather(prev => { return { ...prev, name: data[0]?.local_names?.en } })
+        setTodayWeather(prev => { return { ...prev, name: data[0]?.local_names?.en, country: data[0]?.country } })
+       
       }).catch((err) => {
         console.log(err.message);
-        setSearchDone(false);
+       
+        // setSearchDone(false);
       });
 
   }, [searchedLocation]);
 
   useEffect(() => {
     if (searchDone) {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric&`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric`)
         .then(response => response.json())
         .then(data => {
-          // setTargetLocation(data);
-
-          setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+          setTodayWeather({ ...todayWeather,  temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
           setLoading(false);
         }).catch((err) => {
-          setSearchDone(false);
           setLoading(false);
+          setNoData(true);
           console.log(err.message, "errrr");
         });
     }
@@ -122,7 +128,7 @@ function App() {
       <BrowserRouter>
         <GlobalStyles />
         <Routes>
-          <Route path="/" element={<Main loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
+          <Route path="/" element={<Main noData={noData} loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
