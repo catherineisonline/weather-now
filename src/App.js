@@ -9,15 +9,12 @@ import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist,
 
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", country: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
-  // const [targetLocation, setTargetLocation] = useState({});
   const [searchedLocation, setSearchedLocation] = useState("Buenos Aires");
-  // const [lang, setLang] = useState("en");
   const [lat, setLat] = useState("");
   const [lon, setLon] = useState("");
   const [searchDone, setSearchDone] = useState(false);
   const [theme, setTheme] = useState('clear');
   const [formValue, setFormValue] = useState({ searchedLocation: "" });
-  // const [submit, setSubmit] = useState(false);
   const [formError, setFormError] = useState({});
   const [noData, setNoData] = useState(false);
   const [loading, setLoading] = useState("");
@@ -50,7 +47,6 @@ function App() {
   useEffect(() => {
     setLoading(true);
     setNoData(false);
-    console.log(searchedLocation);
     
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
       .then(response => response.json())
@@ -62,8 +58,6 @@ function App() {
        
       }).catch((err) => {
         console.log(err.message);
-       
-        // setSearchDone(false);
       });
 
   }, [searchedLocation]);

@@ -17,7 +17,7 @@ width: max-content;
 const SearchInput = styled.input`
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
-    border: 1px solid rgba(12, 12, 12, 0.869);
+    border: 1px solid ${({ theme }) => theme.colors.color};
     padding: 10px;
     width: 3rem;
     height: 50px;
@@ -53,6 +53,7 @@ const SearchIcon = styled.img`
     transform: translate(-50%, -50%);
     transition: 0.5s;;
     max-width: 1.5rem;
+    opacity: 0.7;
     ${SearchForm}:hover &{
         left: 82%;
         transition: 0.5s;
