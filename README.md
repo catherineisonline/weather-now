@@ -11,7 +11,6 @@ Weather Now is a simple project that utilizes a weather API to display the curre
 - [React Spinners](https://www.npmjs.com/package/react-spinners)
 
 
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
