@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     let mounted = true;
-    fetch(`https://ipinfo.io?token=${process.env.IP_KEY}`)
+    fetch(`https://ipinfo.io?token=${process.env.REACT_APP_IP_KEY}`)
       .then(response => response.json()).then(data => {
         if (mounted) {
           setLoading(true);
