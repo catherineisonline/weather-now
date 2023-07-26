@@ -3,9 +3,12 @@ import styled from "styled-components";
 const SearchHeader = styled.section`
 display: flex; 
 flex-direction: column;
-padding: 2rem;
-align-items: center; 
-
+align-items: center;
+height: 50px;
+margin-bottom: 2rem;
+@media (max-width: 470px) {
+    margin-top: 10rem;
+  }
 `;
 
 const SearchForm = styled.form`
@@ -18,6 +21,7 @@ const SearchInput = styled.input`
     background-color: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     border: 1px solid ${({ theme }) => theme.colors.color};
+    color: ${({ theme }) => theme.colors.fontColor};
     padding: 10px;
     width: 3rem;
     height: 50px;
@@ -31,7 +35,6 @@ const SearchInput = styled.input`
     max-width: 20rem;
     border-radius: 10px;
     font-size: 26px;
-    position: relative;
     transition: 0.5s;
 };
 
@@ -60,4 +63,14 @@ const SearchIcon = styled.img`
 };
 `;
 
-export { SearchHeader, SearchForm, SearchInput, SearchIcon, SearchButton };
+const ErrorLabel = styled.label`
+    position: absolute;
+    color: ${({ theme }) => theme.colors.fontColor};
+    font-size: 1rem;
+    top: 4rem;
+    @media (max-width: 470px) {
+    margin-top: 4rem;
+  }
+`
+
+export { SearchHeader, SearchForm, SearchInput, SearchIcon, SearchButton, ErrorLabel };

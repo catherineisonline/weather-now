@@ -11,9 +11,11 @@ margin: 0 auto;
 align-items: center;
 justify-content: center;
 text-align: center;
+position: relative;
+color: ${({ theme }) => theme.colors.fontColor};
 @media (max-width: 470px) {
     flex-direction: column;
-    padding-top: 10rem;
+    gap: 1rem;
   }
 `;
 
@@ -32,4 +34,6 @@ border-radius: 50%;
 padding: 1rem;
 opacity: 0.6;
 `;
+
+
 export { FooterBlock, DataSection, Image };

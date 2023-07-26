@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 const CenterContainerBlock = styled.section`
+letter-spacing: 50%;
 display: flex;
-flex-direction:column;
+flex-direction: column;
 gap: 1.5rem;
 text-align: center;
 align-items: center;
@@ -12,6 +13,8 @@ max-width: 600px;
 min-width: 400px;
 width: 100%;
 font-size: 2.5rem;
+position: relative;
+color: ${({ theme }) => theme.colors.fontColor};
 `;
 
 const HighLow = styled.section`
@@ -28,4 +31,5 @@ font-size: 1.4rem;
 const Temperature = styled.p`
 font-size: 3.5rem;
 `;
+
 export { CenterContainerBlock, HighLow, WeatherDesc, Temperature };
