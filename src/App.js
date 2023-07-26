@@ -5,7 +5,7 @@ import GlobalStyles from "./core-ui/Globals";
 import { ThemeProvider } from "styled-components";
 import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist, smoke, fog, haze } from "./core-ui/Themes.styled";
 
-// ${process.env.REACT_APP_VERY_PRIVATE_KEY}
+
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", country: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
   const [searchedLocation, setSearchedLocation] = useState("Tbilisi");
@@ -89,7 +89,7 @@ function App() {
 
   useEffect(() => {
     if (searchDone) {
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&metric`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric`)
         .then(response => response.json())
         .then(data => {
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
