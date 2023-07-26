@@ -1,4 +1,6 @@
 ![Project preview](https://github.com/catherineisonline/weather-now/blob/main/src/assets/images/project-preview.png?raw=true)
+![Project preview](https://github.com/catherineisonline/weather-now/blob/main/src/assets/images/project-preview.png?raw=true)
+![Project preview](https://github.com/catherineisonline/weather-now/blob/main/src/assets/images/project-preview.png?raw=true)
 
 # Weather Now 
 
