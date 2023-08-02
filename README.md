@@ -48,3 +48,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### `npm run eject`
 
 
+
+## Contribution
+
+This project serves as a project to show off my personal skills. I do not accept any contributions like pull requests to this project however if you have any suggestions or ideas feel free to message me or submit an idea in the [discussions](https://github.com/catherineisonline/weather-now/discussions). Otherwise, you are free to fork this project and change it for your own purposes.  
+
+
