@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import GlobalStyles from "./core-ui/Globals";
 import { ThemeProvider } from "styled-components";
 import { defaultWeather, clouds, rain, clear, thunderstorm, snow, drizzle, mist, smoke, fog, haze } from "./core-ui/Themes.styled";
-<<<<<<< HEAD
 
-=======
 const WEATHER_KEY = process.env.REACT_APP_VERY_PRIVATE_KEY;
 const IP_KEY = process.env.REACT_APP_IP_KEY;
->>>>>>> a68be29 (move to gh-pages)
+
 
 function App() {
   const [todayWeather, setTodayWeather] = useState({ name: "", country: "", temp: "", icon: "03d", weather: "", weatherDesc: "", feelsLike: "", humidity: "", wind: "", highest: "", lowest: "" });
@@ -51,11 +49,11 @@ function App() {
 
   useEffect(() => {
     let mounted = true;
-<<<<<<< HEAD
+
     fetch(`https://ipinfo.io?token=${process.env.REACT_APP_IP_KEY}`)
-=======
+
     fetch(`https://ipinfo.io?token=${IP_KEY}`)
->>>>>>> a68be29 (move to gh-pages)
+
       .then(response => response.json()).then(data => {
         if (mounted) {
           setLoading(true);
@@ -74,11 +72,11 @@ function App() {
       return;
     }
     else {
-<<<<<<< HEAD
+
       fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}`)
-=======
+
       fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchedLocation}&limit=1&appid=${WEATHER_KEY}`)
->>>>>>> a68be29 (move to gh-pages)
+
         .then(response => response.json())
         .then(data => {
           if (data[0]?.local_names?.en !== undefined) {
@@ -102,17 +100,17 @@ function App() {
 
   useEffect(() => {
     if (searchDone) {
-<<<<<<< HEAD
+
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.REACT_APP_VERY_PRIVATE_KEY}&units=metric`)
         .then(response => response.json())
         .then(data => {
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
-=======
+
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}&units=metric`)
         .then(response => response.json())
         .then(data => {
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0]?.icon, weather: data.weather[0]?.main.toLowerCase(), weatherDesc: data.weather[0]?.description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
->>>>>>> a68be29 (move to gh-pages)
+
           setLoading(false);
         }).catch((err) => {
           setLoading(false);
@@ -164,17 +162,17 @@ function App() {
   }, [searchDone, lat, lon, todayWeather, searchedLocation]);
   return (
     <ThemeProvider theme={setWeather}>
-<<<<<<< HEAD
+
       <BrowserRouter>
         <GlobalStyles />
         <Routes>
           <Route path="/" element={<Main theme={theme.toLowerCase()} noData={noData} loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
-=======
+
       <BrowserRouter basename={process.env.REACT_APP_URI}>
         <GlobalStyles />
         <Routes>
           <Route path="/weather-now" element={<Main theme={theme.toLowerCase()} noData={noData} loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
->>>>>>> a68be29 (move to gh-pages)
+
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
