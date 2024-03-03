@@ -2,10 +2,7 @@
   "name": "weather-now",
   "version": "0.1.0",
   "private": true,
-<<<<<<< HEAD
-=======
   "homepage": "https://catherineisonline.github.io/weather-now/",
->>>>>>> a68be29 (move to gh-pages)
   "dependencies": {
     "@loadable/component": "^5.15.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -21,11 +18,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-<<<<<<< HEAD
-=======
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
->>>>>>> a68be29 (move to gh-pages)
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -48,13 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-<<<<<<< HEAD
   }
 }
-=======
   },
   "devDependencies": {
     "gh-pages": "^6.1.1"
   }
 }
->>>>>>> a68be29 (move to gh-pages)
