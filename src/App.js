@@ -106,17 +106,19 @@ function App() {
         .then(data => {
           setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0].icon, weather: data.weather[0].main.toLowerCase(), weatherDesc: data.weather[0].description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
 
-      fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}&units=metric`)
-        .then(response => response.json())
-        .then(data => {
-          setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0]?.icon, weather: data.weather[0]?.main.toLowerCase(), weatherDesc: data.weather[0]?.description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
+          fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${WEATHER_KEY}&units=metric`)
+            .then(response => response.json())
+            .then(data => {
+              setTodayWeather({ ...todayWeather, temp: Math.ceil(data?.main?.temp), icon: data.weather[0]?.icon, weather: data.weather[0]?.main.toLowerCase(), weatherDesc: data.weather[0]?.description, feelsLike: data.main.feels_like, humidity: data.main.humidity, wind: data.wind.speed, highest: data.main.temp_max, lowest: data.main.temp_min });
 
-          setLoading(false);
-        }).catch((err) => {
-          setLoading(false);
-          setNoData(true);
-          console.log(err.message, "errrr");
-        });
+              setLoading(false);
+            }).catch((err) => {
+              setLoading(false);
+              setNoData(true);
+              console.log(err.message, "errrr");
+            });
+        }
+        )
     }
     const toggleTheme = () => {
       if (todayWeather.weather === '') {
@@ -160,23 +162,20 @@ function App() {
     return () => setSearchDone(false);
 
   }, [searchDone, lat, lon, todayWeather, searchedLocation]);
+
+
   return (
     <ThemeProvider theme={setWeather}>
-
       <BrowserRouter>
         <GlobalStyles />
         <Routes>
           <Route path="/" element={<Main theme={theme.toLowerCase()} noData={noData} loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
-
-      <BrowserRouter basename={process.env.REACT_APP_URI}>
-        <GlobalStyles />
-        <Routes>
-          <Route path="/weather-now" element={<Main theme={theme.toLowerCase()} noData={noData} loading={loading} formError={formError} formValue={formValue} todayWeather={todayWeather} handleSubmit={handleSubmit} handleValidation={handleValidation} />} />
-
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
   );
+
+
 }
 
 export default App;
