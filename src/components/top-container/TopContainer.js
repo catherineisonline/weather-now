@@ -10,7 +10,6 @@ const TopContainer = ({ handleSubmit, handleValidation, formValue, formError }) 
                     <SearchIcon onClick={handleSubmit} src={search} alt="" aria-hidden="true" />
                     <span className="hidden-label">search</span>
                 </SearchButton>
-
             </SearchForm>
             <ErrorLabel>{formError.searchedLocation}</ErrorLabel>
         </SearchHeader>
