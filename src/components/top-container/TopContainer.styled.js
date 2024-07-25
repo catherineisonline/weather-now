@@ -4,7 +4,7 @@ const SearchHeader = styled.section`
 display: flex; 
 flex-direction: column;
 align-items: center;
-height: 50px;
+height: 3.125rem;
 margin-bottom: 2rem;
 @media (max-width: 470px) {
     margin-top: 10rem;
@@ -24,7 +24,7 @@ const SearchInput = styled.input`
     color: ${({ theme }) => theme.colors.fontColor};
     padding: 10px;
     width: 3rem;
-    height: 50px;
+    height: 3.125rem;
     background: none;
     border-radius: 50px;
     font-size: 0;
@@ -34,7 +34,7 @@ const SearchInput = styled.input`
     min-width: 14rem;
     max-width: 20rem;
     border-radius: 10px;
-    font-size: 26px;
+    font-size: 1.625rem;
     transition: 0.5s;
 };
 
