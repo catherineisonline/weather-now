@@ -9,6 +9,6 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 font-family: "Ubuntu", sans-serif;
-height: 100vh;`;
+min-height: 100vh;`;
 
 export default StyledWeatherContainer;

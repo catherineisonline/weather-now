@@ -22,7 +22,7 @@ body {
     overflow-y: scroll;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 body::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */

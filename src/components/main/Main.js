@@ -1,4 +1,5 @@
 import Main from "./Main.styled";
+import React from "react";
 import BottomContainer from "../bottom-container/BottomContainer";
 import TopContainer from "../top-container/TopContainer";
 import CenterContainer from "../center-container/CenterContainer";
