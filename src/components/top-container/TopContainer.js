@@ -1,3 +1,4 @@
+import React from "react";
 import { SearchHeader, SearchForm, SearchInput, SearchIcon, SearchButton, ErrorLabel } from "./TopContainer.styled";
 import search from "../../assets/images/search.svg";
 

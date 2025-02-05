@@ -1,4 +1,5 @@
 import { Route, Routes, BrowserRouter } from "react-router-dom";
+import React from "react";
 import Main from "./components/main/Main";
 import { useEffect, useState } from "react";
 import GlobalStyles from "./core-ui/Globals";
